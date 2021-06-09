@@ -1,0 +1,21 @@
+[package]
+name = "cudart-sys"
+description = "FFI bindings to cuda 11.x runtime"
+version = "0.1.0"
+edition = "2018"
+authors = ["Maxim Vorobjov"]
+keywords = ["cuda", "nvidia", "sys", "cudart"]
+license = "MIT OR Apache-2.0"
+links = "cuda"
+build = "build.rs"
+
+[dependencies]
+libc = "0.2"
+
+[build-dependencies]
+pkg-config = "0.3"
+bindgen = { version = "0.58", optional = true }
+
+[features]
+default = ["generate"]
+generate = ["bindgen"]
