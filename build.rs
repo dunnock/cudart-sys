@@ -1,27 +1,57 @@
 use pkg_config;
 use std::env;
+use std::path::Path;
 
 fn main() {
-    let cuda_path = env::var("CUDA_PATH").ok();
-    let lib_dir = cuda_path.as_ref().map(|path| format!("{}/lib/x64", path));
-    let include_dir = cuda_path.as_ref().map(|path| format!("{}/include", path));
+    let mut link_path = None;
+    let mut include_path = None;
+    let env_cuda_path = env::var("CUDA_PATH").unwrap_or("".to_string());
 
-    if lib_dir.is_none() && include_dir.is_none() {
-        if let Ok(info) = pkg_config::find_library("cudart") {
-            // avoid empty include paths as they are not supported by GCC
-            if !info.include_paths.is_empty() {
-                let paths = env::join_paths(info.include_paths).unwrap();
-                println!("cargo:include={}", paths.to_str().unwrap());
-            }
-        }
-        if let Ok(info) = pkg_config::find_library("cuda") {
-            // avoid empty include paths as they are not supported by GCC
-            if !info.include_paths.is_empty() {
-                let paths = env::join_paths(info.include_paths).unwrap();
-                println!("cargo:include={}", paths.to_str().unwrap());
+    // First let's look through some default directories, if they exist
+    let possible_paths = vec![Path::new(&env_cuda_path), Path::new("/usr/local/cuda")];
+    for cuda_path in possible_paths {
+        if cuda_path.is_dir() {
+            let possible_link = if cuda_path.join("lib64").is_dir() {
+                cuda_path.join("lib64")
+            } else {
+                cuda_path.join("lib").join("x64")
+            };
+            let possible_include = cuda_path.join("include");
+
+            if possible_link.is_dir() && possible_include.is_dir() {
+                link_path = Some(possible_link);
+                include_path = Some(possible_include);
+                break;
             }
         }
     }
+
+    // If all else fails, try looking through `pkg-config`
+    if include_path.is_none() {
+        let packages = vec!["cuda", "cudart", "cuda-11.3", "cudart-11.3"];
+        for package in packages {
+            if let Ok(pkg) = pkg_config::probe_library(package) {
+                assert!(pkg.link_paths.len() == 1);
+                assert!(pkg.include_paths.len() == 1);
+                link_path = Some(pkg.link_paths[0].clone());
+                include_path = Some(pkg.include_paths[0].clone());
+                break;
+            }
+        }
+    }
+
+    // Hopefully by this point we have it all figured out...
+    if let (Some(include_path), Some(link_path)) = (&include_path, link_path) {
+        println!("cargo:include={}", include_path.to_str().unwrap());
+        println!(
+            "cargo:rustc-link-search=native={}",
+            link_path.to_str().unwrap()
+        );
+    } else {
+        panic!("unable to find cuda libraries");
+    }
+
+    //-------------------------------------------------------------------------
 
     let libs_env = env::var("CUDA_LIBS").ok();
     let libs = match libs_env {
@@ -35,28 +65,15 @@ fn main() {
         "dylib"
     };
 
-    if let Some(lib_dir) = lib_dir {
-        println!("cargo:rustc-link-search=native={}", lib_dir);
-    }
-
     for lib in libs {
         println!("cargo:rustc-link-lib={}={}", mode, lib);
-    }
-
-    if let Some(include_dir) = include_dir.clone() {
-        println!("cargo:include={}", include_dir);
     }
 
     println!("cargo:rerun-if-changed=build.rs");
 
     #[cfg(feature = "generate")]
     {
-        println!("cargo:warning=Running bindgen(cublas-sys), make sure to have all required host libs installed!");
-
         use std::path::PathBuf;
-
-        let include_dir = include_dir.unwrap_or_else(|| String::from("/usr/include/cuda"));
-
         let bindings = bindgen::Builder::default()
             .rust_target(bindgen::RustTarget::Stable_1_40)
             .raw_line(
@@ -71,7 +88,7 @@ fn main() {
             .ctypes_prefix("::libc")
             .size_t_is_usize(true)
             .clang_arg("-I")
-            .clang_arg(include_dir)
+            .clang_arg(include_path.unwrap().to_str().unwrap())
             .header("wrapper.h")
             .rustified_non_exhaustive_enum("cuda.*")
             .whitelist_function("cu.*")
