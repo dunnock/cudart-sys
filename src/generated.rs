@@ -10,7 +10,7 @@
 
 pub const CUDART_VERSION: u32 = 11030;
 pub const CUDA_IPC_HANDLE_SIZE: u32 = 64;
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = "                                                                              *"]
 #[doc = "                                                                              *"]
@@ -60,7 +60,7 @@ fn bindgen_test_layout_dim3() {
         concat!("Offset of field: ", stringify!(dim3), "::", stringify!(z))
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA error types"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -539,7 +539,7 @@ pub enum cudaError {
     #[doc = " This error return is deprecated as of CUDA 4.1."]
     cudaErrorApiFailureBase = 10000,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Channel format kind"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -804,7 +804,7 @@ fn bindgen_test_layout_cudaArraySparseProperties() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA memory types"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -818,7 +818,7 @@ pub enum cudaMemoryType {
     #[doc = "< Managed memory"]
     cudaMemoryTypeManaged = 3,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA memory copy types"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1344,7 +1344,7 @@ fn bindgen_test_layout_cudaMemsetParams() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Specifies performance hint with ::cudaAccessPolicyWindow for hitProp and missProp members."]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1489,7 +1489,7 @@ fn bindgen_test_layout_cudaHostNodeParams() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Possible stream capture statuses returned by ::cudaStreamIsCapturing"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1502,7 +1502,7 @@ pub enum cudaStreamCaptureStatus {
     #[doc = "has been invalidated, but not terminated"]
     cudaStreamCaptureStatusInvalidated = 2,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Possible modes for stream capture thread interactions. For more details see"]
 #[doc = " ::cudaStreamBeginCapture and ::cudaThreadExchangeStreamCaptureMode"]
@@ -1512,7 +1512,7 @@ pub enum cudaStreamCaptureMode {
     cudaStreamCaptureModeThreadLocal = 1,
     cudaStreamCaptureModeRelaxed = 2,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum cudaSynchronizationPolicy {
@@ -1521,7 +1521,7 @@ pub enum cudaSynchronizationPolicy {
     cudaSyncPolicyYield = 3,
     cudaSyncPolicyBlockingSync = 4,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Stream Attributes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1574,7 +1574,7 @@ fn bindgen_test_layout_cudaStreamAttrValue() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Flags for ::cudaStreamUpdateCaptureDependencies"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1584,7 +1584,7 @@ pub enum cudaStreamUpdateCaptureDependenciesFlags {
     #[doc = "< Replace the dependency set with the new nodes"]
     cudaStreamSetCaptureDependencies = 1,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Flags for user objects for graphs"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1592,7 +1592,7 @@ pub enum cudaUserObjectFlags {
     #[doc = "< Indicates the destructor execution is not synchronized by any CUDA handle."]
     cudaUserObjectNoDestructorSync = 1,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Flags for retaining user object references for graphs"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1606,7 +1606,7 @@ pub enum cudaUserObjectRetainFlags {
 pub struct cudaGraphicsResource {
     _unused: [u8; 0],
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA graphics interop register flags"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1622,7 +1622,7 @@ pub enum cudaGraphicsRegisterFlags {
     #[doc = "< CUDA will perform texture gather operations on this resource"]
     cudaGraphicsRegisterFlagsTextureGather = 8,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA graphics interop map flags"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1634,7 +1634,7 @@ pub enum cudaGraphicsMapFlags {
     #[doc = "< CUDA will only write to and will not read from this resource"]
     cudaGraphicsMapFlagsWriteDiscard = 2,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA graphics interop array indices for cube maps"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1652,7 +1652,7 @@ pub enum cudaGraphicsCubeFace {
     #[doc = "< Negative Z face of cubemap"]
     cudaGraphicsCubeFaceNegativeZ = 5,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Graph kernel node Attributes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1709,7 +1709,7 @@ fn bindgen_test_layout_cudaKernelNodeAttrValue() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA resource types"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1723,7 +1723,7 @@ pub enum cudaResourceType {
     #[doc = "< Pitch 2D resource"]
     cudaResourceTypePitch2D = 3,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA texture resource view formats"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2522,7 +2522,7 @@ fn bindgen_test_layout_cudaFuncAttributes() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA function attributes that can be set using ::cudaFuncSetAttribute"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2533,7 +2533,7 @@ pub enum cudaFuncAttribute {
     cudaFuncAttributePreferredSharedMemoryCarveout = 9,
     cudaFuncAttributeMax = 10,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA function cache configurations"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2547,7 +2547,7 @@ pub enum cudaFuncCache {
     #[doc = "< Prefer equal size L1 cache and shared memory"]
     cudaFuncCachePreferEqual = 3,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA shared memory configuration"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2568,7 +2568,7 @@ pub enum cudaSharedCarveout {
     #[doc = "< Prefer maximum available L1 cache, minimum shared memory"]
     cudaSharedmemCarveoutMaxL1 = 0,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA device compute modes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2582,7 +2582,7 @@ pub enum cudaComputeMode {
     #[doc = "< Compute-exclusive-process mode (Many threads in one process will be able to use ::cudaSetDevice() with this device)"]
     cudaComputeModeExclusiveProcess = 3,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA Limits"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2602,7 +2602,7 @@ pub enum cudaLimit {
     #[doc = "< A size in bytes for L2 persisting lines cache size"]
     cudaLimitPersistingL2CacheSize = 6,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA Memory Advise values"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2620,7 +2620,7 @@ pub enum cudaMemoryAdvise {
     #[doc = "< Let the Unified Memory subsystem decide on the page faulting policy for the specified device"]
     cudaMemAdviseUnsetAccessedBy = 6,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA range attributes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2634,7 +2634,7 @@ pub enum cudaMemRangeAttribute {
     #[doc = "< The last location to which the range was prefetched"]
     cudaMemRangeAttributeLastPrefetchLocation = 4,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA Profiler Output modes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2644,7 +2644,7 @@ pub enum cudaOutputMode {
     #[doc = "< Output mode Comma separated values format."]
     cudaCSV = 1,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA GPUDirect RDMA flush writes APIs supported on the device"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2654,7 +2654,7 @@ pub enum cudaFlushGPUDirectRDMAWritesOptions {
     #[doc = "< The ::CU_STREAM_WAIT_VALUE_FLUSH flag and the ::CU_STREAM_MEM_OP_FLUSH_REMOTE_WRITES MemOp are supported on the CUDA device."]
     cudaFlushGPUDirectRDMAWritesOptionMemOps = 2,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA GPUDirect RDMA flush writes ordering features of the device"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2666,7 +2666,7 @@ pub enum cudaGPUDirectRDMAWritesOrdering {
     #[doc = "< Any CUDA device in the system can consistently consume GPUDirect RDMA writes to this device."]
     cudaGPUDirectRDMAWritesOrderingAllDevices = 200,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA GPUDirect RDMA flush writes scopes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2676,7 +2676,7 @@ pub enum cudaFlushGPUDirectRDMAWritesScope {
     #[doc = "< Blocks until remote writes are visible to all CUDA device contexts."]
     cudaFlushGPUDirectRDMAWritesToAllDevices = 200,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA GPUDirect RDMA flush writes targets"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2684,7 +2684,7 @@ pub enum cudaFlushGPUDirectRDMAWritesTarget {
     #[doc = "< Sets the target for ::cudaDeviceFlushGPUDirectRDMAWrites() to the currently active CUDA device context."]
     cudaFlushGPUDirectRDMAWritesTargetCurrentDevice = 0,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA device attributes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2911,7 +2911,7 @@ pub enum cudaDeviceAttr {
     #[doc = "< Handle types supported with mempool based IPC"]
     cudaDevAttrMemoryPoolSupportedHandleTypes = 119,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA memory pool attributes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -2954,7 +2954,7 @@ pub enum cudaMemPoolAttr {
     #[doc = " the last time it was reset. High watermark can only be reset to zero."]
     cudaMemPoolAttrUsedMemHigh = 8,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Specifies the type of location"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -3007,7 +3007,7 @@ fn bindgen_test_layout_cudaMemLocation() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Specifies the memory protection flags for mapping."]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -3061,7 +3061,7 @@ fn bindgen_test_layout_cudaMemAccessDesc() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Defines the allocation types available"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -3074,7 +3074,7 @@ pub enum cudaMemAllocationType {
     #[doc = " location while the application is actively using it"]
     cudaMemAllocationTypeMax = 2147483647,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Flags for specifying particular handle types"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -3203,7 +3203,7 @@ fn bindgen_test_layout_cudaMemPoolPtrExportData() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA device P2P attributes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -4353,7 +4353,6 @@ fn bindgen_test_layout_cudaIpcEventHandle_st() {
         )
     );
 }
-#[doc = " CUDA IPC event handle"]
 pub type cudaIpcEventHandle_t = cudaIpcEventHandle_st;
 #[doc = " CUDA IPC memory handle"]
 #[repr(C)]
@@ -4384,9 +4383,8 @@ fn bindgen_test_layout_cudaIpcMemHandle_st() {
         )
     );
 }
-#[doc = " CUDA IPC memory handle"]
 pub type cudaIpcMemHandle_t = cudaIpcMemHandle_st;
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " External memory handle types"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -4780,7 +4778,7 @@ fn bindgen_test_layout_cudaExternalMemoryMipmappedArrayDesc() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " External semaphore handle types"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -5648,7 +5646,7 @@ pub struct CUmemPoolHandle_st {
 }
 #[doc = " CUDA memory pool"]
 pub type cudaMemPool_t = *mut CUmemPoolHandle_st;
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA cooperative group scope"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -5979,7 +5977,7 @@ fn bindgen_test_layout_cudaExternalSemaphoreWaitNodeParams() {
         )
     );
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA Graph node types"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -6009,7 +6007,7 @@ pub struct CUgraphExec_st {
 }
 #[doc = " CUDA executable (launchable) graph"]
 pub type cudaGraphExec_t = *mut CUgraphExec_st;
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA Graph Update error types"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -6031,7 +6029,7 @@ pub enum cudaGraphExecUpdateResult {
     #[doc = "< The update failed because the function of a kernel node changed in an unsupported way"]
     cudaGraphExecUpdateErrorUnsupportedFunctionChange = 7,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " Flags to specify search options to be used with ::cudaGetDriverEntryPoint"]
 #[doc = " For more details see ::cuGetProcAddress"]
@@ -6044,7 +6042,7 @@ pub enum cudaGetDriverEntryPointFlags {
     #[doc = "< Search for per-thread versions of driver symbols."]
     cudaEnablePerThreadDefaultStream = 2,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA Graph debug write options"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -6069,7 +6067,7 @@ pub enum cudaGraphDebugDotFlags {
     #[doc = " Adds cudaKernelNodeAttrID values to output"]
     cudaGraphDebugDotFlagsHandles = 1024,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA Surface boundary modes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -6081,7 +6079,7 @@ pub enum cudaSurfaceBoundaryMode {
     #[doc = "< Trap boundary mode"]
     cudaBoundaryModeTrap = 2,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA Surface format modes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -6123,7 +6121,7 @@ fn bindgen_test_layout_surfaceReference() {
 }
 #[doc = " An opaque value that represents a CUDA Surface object"]
 pub type cudaSurfaceObject_t = ::libc::c_ulonglong;
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA texture address modes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -6137,7 +6135,7 @@ pub enum cudaTextureAddressMode {
     #[doc = "< Border address mode"]
     cudaAddressModeBorder = 3,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA texture filter modes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -6147,7 +6145,7 @@ pub enum cudaTextureFilterMode {
     #[doc = "< Linear filter mode"]
     cudaFilterModeLinear = 1,
 }
-#[repr(i32)]
+#[repr(u32)]
 #[non_exhaustive]
 #[doc = " CUDA texture read modes"]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
